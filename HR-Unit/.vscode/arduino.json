@@ -1,0 +1,5 @@
+{
+    "sketch": "..\\Ref-Unit\\main.ino",
+    "board": "arduino:avr:uno",
+    "configuration": "cpu=atmega328"
+}
