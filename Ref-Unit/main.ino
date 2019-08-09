@@ -1,20 +1,18 @@
+#include "pinout.h"
+#include "RefUnit.h"
+#define BUTTON_PORT (D3)
+#define LED_PORT (D5)
+static RefUnit unit;
 
 void setup() {
-  
-  pinMode(2, INPUT);
-  pinMode(13, OUTPUT);
-  Serial.begin(9600);
+  unit = RefUnit(BUTTON_PORT, LED_PORT);
 }
 
 void loop() {
-  if(digitalRead(2) == HIGH && led_state)
+  if (digitalRead(BUTTON_PORT) == HIGH)
   {
-    digitalWrite(13, HIGH);
-    led_state=false;
+    unit.on_button_pressed();
+    while (digitalRead(BUTTON_PORT) == HIGH);
   }
-  else if (digitalRead(2) == LOW && !led_state)
-  {
-    digitalWrite(13, LOW);
-    led_state=true;
-  }
+  unit.get_led().operate();
 }
